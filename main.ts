@@ -1,21 +1,140 @@
+namespace SpriteKind {
+    export const THE_END = SpriteKind.create()
+}
+function right () {
+    characterAnimations.loopFrames(
+    mySprite,
+    [img`
+        . . . . . . . . . . . . . 
+        . . . f f f f f f . . . . 
+        . f f f f f f f f f . . . 
+        . f f f f f f 2 f f f . . 
+        f f f f 2 f f f 2 f f f . 
+        f 2 f f 2 2 f f f 2 2 f f 
+        f 2 2 f f f f d f f f f f 
+        f f f f f f f d d f f f . 
+        f f d d f 4 f d d f f f . 
+        f f d e d 1 f d d f f . . 
+        . f f f d d d d d f . . . 
+        . 1 1 1 d d d d f f . . . 
+        . d 1 1 d 1 1 1 1 f . . . 
+        . f d d f 1 1 1 1 f f . . 
+        . f f f f f f f f f f . . 
+        . . f f . . . f f f . . . 
+        `,img`
+        . . . . . . . . . . . . . 
+        . . . f f f f f f . . . . 
+        . f f f f f f f f f . . . 
+        . f f f f f f 2 f f f . . 
+        f f f f 2 f f f 2 f f f . 
+        f 2 f f 2 2 f f f 2 2 f f 
+        f 2 2 f f f f d f f f f f 
+        f f f f f f f d d f f f . 
+        f f d d f 4 f d d f f . . 
+        . f d e d 1 f d d f f . . 
+        . f f f d d d d d f . . . 
+        . . f d 1 1 d d f f . . . 
+        . . f d 1 1 d 1 1 f . . . 
+        . f f f d d f 1 1 f f . . 
+        . f f f f f f f f f f . . 
+        . . f f . . . f f f . . . 
+        `,img`
+        . . . f f f f f . . . . . 
+        . f f f f f f f f f . . . 
+        . f f f f f f 2 f f f . . 
+        f f f f 2 f f f 2 f f . . 
+        f 2 f f 2 2 f f f 2 2 f f 
+        f c 2 f f f f d f f f f f 
+        f f f f f f f d d f f f . 
+        f f d d f 4 f d d f f . . 
+        . f d e d 1 f d d f . . . 
+        . f f f d d d d d f . . . 
+        . . f d d d d d f f . . . 
+        . . d 1 1 d 1 1 1 f . . . 
+        . . d 1 1 d 1 1 1 f . . . 
+        . . f d d f 1 1 1 f . . . 
+        . . . f f f f f f . . . . 
+        . . . . f f f . . . . . . 
+        `],
+    500,
+    characterAnimations.rule(Predicate.MovingRight)
+    )
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.vy == 0) {
         mySprite.vy = -250
     }
 })
+function left () {
+    characterAnimations.loopFrames(
+    mySprite,
+    [img`
+        . . . . . f f f f f . . . 
+        . . . f f f f f f f f f . 
+        . . f f f 2 f f f f f f . 
+        . . f f 2 f f f 2 f f f f 
+        f f 2 2 f f f 2 2 f f 2 f 
+        f f f f f d f f f f 2 2 f 
+        . f f f d d f f f f f f f 
+        . . f f d d f 4 f d d f f 
+        . . . f d d f 1 d e d f . 
+        . . . f d d d d d f f f . 
+        . . . f f d d d d d f . . 
+        . . . f 1 1 1 1 1 1 1 . . 
+        . . . f 1 1 1 1 1 1 1 . . 
+        . . . f 1 1 1 f d d f . . 
+        . . . . f f f f f f . . . 
+        . . . . . . f f f . . . . 
+        `,img`
+        . . . . . . . . . . . . . 
+        . . . . f f f f f f . . . 
+        . . . f f f f f f f f f . 
+        . . f f f 2 f f f f f f . 
+        . f f f 2 f f f 2 f f f f 
+        f f 2 2 f f f 2 2 f f 2 f 
+        f f f f f d f f f f 2 2 f 
+        . f f f d d f f f f f f f 
+        . . f f d d f b f d d f f 
+        . . f f d d f 1 d 4 d f . 
+        . . . f d d d d d f f f . 
+        . . . f f 1 1 1 1 d f . . 
+        . . . f 1 1 1 1 1 d f . . 
+        . . f f 1 1 f d d f f f . 
+        . . f f f f f f f f f f . 
+        . . . f f f . . . f f . . 
+        `,img`
+        . . . . . . . . . . . . . 
+        . . . . f f f f f f . . . 
+        . . . f f f f f f f f f . 
+        . . f f f 2 f f f f f f . 
+        . f f f 2 f f f 2 f f f f 
+        f f 2 2 f f f 2 2 f f 2 f 
+        f f f f f d f f f f 2 2 f 
+        . f f f d d f f f f f f f 
+        . f f f d d f 4 f d d f f 
+        . . f f d d f 1 d e d f f 
+        . . . f d d d d d f f f . 
+        . . . f f 1 1 1 1 1 1 1 . 
+        . . . f 1 1 1 1 1 1 1 d . 
+        . . f f 1 1 1 1 f d d f . 
+        . . f f f f f f f f f f . 
+        . . . f f f . . . f f . . 
+        `],
+    500,
+    characterAnimations.rule(Predicate.MovingLeft)
+    )
+}
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.shrub, function (sprite, location) {
     current_level += 1
-    level0()
+    LEVEL_2()
 })
 function level0 () {
     if (current_level == 0) {
         tiles.setCurrentTilemap(tilemap`level1`)
-    } else {
-        tiles.setCurrentTilemap(tilemap`level3`)
     }
     mySprite.ay = 500
     scene.cameraFollowSprite(mySprite)
-    info.setLife(3)
+    info.setLife(1)
     for (let value of tiles.getTilesByType(assets.tile`myTile0`)) {
         duckkkkkk = sprites.create(img`
             . . . . . . . . . . . . . . . . 
@@ -38,15 +157,139 @@ function level0 () {
         tiles.placeOnTile(duckkkkkk, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
+    for (let value of tiles.getTilesByType(assets.tile`myTile2`)) {
+        water = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.THE_END)
+        tiles.placeOnTile(water, value)
+        animation.runImageAnimation(
+        water,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            8 . . . . . 8 . . . . . . . . . 
+            8 8 8 . . 8 8 8 . 8 . . . . 8 8 
+            8 8 8 8 8 8 8 8 . 8 8 8 8 . 8 8 
+            8 8 6 6 6 6 8 8 8 8 6 6 8 8 8 8 
+            6 6 6 9 9 6 6 6 6 6 9 6 6 6 8 8 
+            6 6 9 9 9 6 9 6 6 6 9 6 6 9 6 6 
+            6 9 9 9 9 9 9 9 6 6 9 6 9 9 9 6 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 6 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            8 . . . . . . . . . . . . . . . 
+            8 8 8 . . . . . . . . . . . . . 
+            8 8 8 8 . . . . . . . . . . . 8 
+            8 6 8 8 . . 8 . . . 8 . 8 . 8 8 
+            6 6 6 8 8 8 8 8 . 8 8 8 8 8 8 8 
+            6 9 6 6 6 8 8 8 8 8 8 6 6 6 8 8 
+            6 9 9 6 9 6 9 6 6 6 9 6 6 9 6 6 
+            9 9 9 9 9 9 9 9 6 6 9 6 9 9 9 6 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 6 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . 8 . . . . 
+            . . . . . . . . . . 8 8 8 . . . 
+            . . . . . . 8 . . . 8 8 8 . . . 
+            . . . . . 8 8 . . . 8 6 8 . . 8 
+            8 . . . 8 8 8 8 . 8 9 6 6 . 8 8 
+            8 8 8 . 6 6 8 8 . 8 9 6 6 8 8 8 
+            8 8 8 8 9 6 6 8 8 8 9 6 9 9 6 6 
+            8 8 6 6 9 9 9 6 6 6 9 9 9 9 9 6 
+            6 6 6 9 9 9 9 9 9 9 9 9 9 9 9 6 
+            6 6 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        200,
+        true
+        )
+        tiles.setTileAt(value, assets.tile`transparency16`)
+    }
 }
-info.onLifeZero(function () {
-    game.setGameOverMessage(false, "COME ON PETER!")
+sprites.onOverlap(SpriteKind.Player, SpriteKind.THE_END, function (sprite, otherSprite) {
+    game.setGameOverMessage(false, "YOU CAN'T PLAY GAMES:))")
     game.gameOver(false)
 })
+info.onLifeZero(function () {
+    game.setGameOverMessage(false, "Come on dude! IT'S EASY!")
+    game.gameOver(false)
+})
+function LEVEL_2 () {
+    tiles.setCurrentTilemap(tilemap`level3`)
+    mySprite = sprites.create(img`
+        . . . . f f f f . . . . . 
+        . . f f f f f f f f . . . 
+        . f f f f f f 2 f f f . . 
+        f f f f f f 2 2 f f f 2 . 
+        f f f 2 f f f f f f f 2 . 
+        2 2 2 f f f d d f f 2 2 . 
+        f f f f f d d f f 2 2 f . 
+        f f f 4 f d d f 4 f f f . 
+        . f d 1 f d d f 1 d f . . 
+        . f d d d f f d d d f . . 
+        . f f f d 2 f d f f f . . 
+        f e f 1 1 1 1 1 1 f e f . 
+        d d f 1 1 1 1 1 1 f d d . 
+        d d f 1 1 1 1 1 1 f d d . 
+        . . . f f f f f f . . . . 
+        . . . f f . . f f . . . . 
+        `, SpriteKind.Player)
+    controller.moveSprite(mySprite, 100, 0)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
     sprites.destroy(otherSprite)
+    mySprite.startEffect(effects.trail, 1000)
 })
+let water: Sprite = null
 let duckkkkkk: Sprite = null
 let mySprite: Sprite = null
 let current_level = 0
@@ -176,20 +419,23 @@ current_level = 0
 mySprite = sprites.create(img`
     . . . . f f f f . . . . . 
     . . f f f f f f f f . . . 
-    . f f f f f f c f f f . . 
-    f f f f f f c c f f f c . 
-    f f f c f f f f f f f c . 
-    c c c f f f e e f f c c . 
-    f f f f f e e f f c c f . 
-    f f f b f e e f b f f f . 
-    . f 4 1 f 4 4 f 1 4 f . . 
-    . f e 4 4 4 4 4 4 e f . . 
-    . f f f e e e e f f f . . 
-    f e f b 7 7 7 7 b f e f . 
-    e 4 f 7 7 7 7 7 7 f 4 e . 
-    e e f 6 6 6 6 6 6 f e e . 
+    . f f f f f f 2 f f f . . 
+    f f f f f f 2 2 f f f 2 . 
+    f f f 2 f f f f f f f 2 . 
+    2 2 2 f f f d d f f 2 2 . 
+    f f f f f d d f f 2 2 f . 
+    f f f 4 f d d f 4 f f f . 
+    . f d 1 f d d f 1 d f . . 
+    . f d d d f f d d d f . . 
+    . f f f d 2 f d f f f . . 
+    f e f 1 1 1 1 1 1 f e f . 
+    d d f 1 1 1 1 1 1 f d d . 
+    d d f 1 1 1 1 1 1 f d d . 
     . . . f f f f f f . . . . 
     . . . f f . . f f . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(mySprite, 100, 0)
+level0()
+right()
+left()
 level0()
