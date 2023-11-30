@@ -1,5 +1,7 @@
 namespace SpriteKind {
     export const THE_END = SpriteKind.create()
+    export const f = SpriteKind.create()
+    export const flag = SpriteKind.create()
 }
 function right () {
     characterAnimations.loopFrames(
@@ -60,11 +62,17 @@ function right () {
     characterAnimations.rule(Predicate.MovingRight)
     )
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.f, function (sprite, otherSprite) {
+    sprites.destroy(mySprite)
+    game.setGameOverMessage(false, "GAME OVER!")
+    game.gameOver(false)
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     music.stopAllSounds()
-    scene_1()
+    LEVEL_1()
 })
 function LEVEL_1 () {
+    current_level = 0
     scene.setBackgroundImage(img`
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -187,7 +195,7 @@ function LEVEL_1 () {
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
         6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
         `)
-    current_level = 0
+    tiles.setCurrentTilemap(tilemap`level1`)
     mySprite = sprites.create(img`
         . . . . f f f f . . . . . 
         . . f f f f f f f f . . . 
@@ -207,39 +215,50 @@ function LEVEL_1 () {
         . . . f f . . f f . . . . 
         `, SpriteKind.Player)
     controller.moveSprite(mySprite, 100, 0)
-    LEVEL_1()
     right()
     left()
-    LEVEL_1()
-    if (current_level == 0) {
-        tiles.setCurrentTilemap(tilemap`level1`)
-    }
     mySprite.ay = 500
     scene.cameraFollowSprite(mySprite)
-    info.setLife(1)
-    for (let value of tiles.getTilesByType(assets.tile`myTile0`)) {
+    info.setLife(5)
+    for (let fg of tiles.getTilesByType(assets.tile`myTile0`)) {
         duckkkkkk = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . b 5 5 b . . . 
-            . . . . . . b b b b b b . . . . 
-            . . . . . b b 5 5 5 5 5 b . . . 
-            . b b b b b 5 5 5 5 5 5 5 b . . 
-            . b d 5 b 5 5 5 5 5 5 5 5 b . . 
-            . . b 5 5 b 5 d 1 f 5 d 4 f . . 
-            . . b d 5 5 b 1 f f 5 4 4 c . . 
-            b b d b 5 5 5 d f b 4 4 4 4 b . 
-            b d d c d 5 5 b 5 4 4 4 4 4 4 b 
-            c d d d c c b 5 5 5 5 5 5 5 b . 
-            c b d d d d d 5 5 5 5 5 5 5 b . 
-            . c d d d d d d 5 5 5 5 5 d b . 
-            . . c b d d d d d 5 5 5 b b . . 
-            . . . c c c c c c c c b b . . . 
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ................................
+            ..........ffff....f.............
+            ..........fdeef.ffeffff.........
+            ..........fddeffeeeeeeeffff.....
+            .......ffffeeefeeeeeeeeeeef.....
+            ......feeefeeeeeeeeeeeeeeeff....
+            ......fefeeeeeeeeeeeeeeeeeef....
+            .....feefeeeeeeeeeeeeeeeeeeff...
+            ...ffeeeeeeeeeeeeeeeeeeeeeeef...
+            ..ffeeeeeeeeeeeeeeeeeeeeeeeeff..
+            ..ffee2eeeeeeeeeeeeeeeeeeeeeff..
+            ...f22eeeeeffeeeeeeeeeeeeeeef...
+            ....ffffffff.feeeeeeeeeeeeeff...
+            ............feeeeeeeeeeeeeef....
+            ...........feeeffffffefeefff....
+            ..........feeeff.....feeff......
+            ........dfeeeef....dfeeef.......
+            ........dfffff.....dfffff.......
+            ................................
+            ................................
             `, SpriteKind.Enemy)
-        tiles.placeOnTile(duckkkkkk, value)
-        tiles.setTileAt(value, assets.tile`transparency16`)
+        tiles.placeOnTile(duckkkkkk, fg)
+        tiles.setTileAt(fg, assets.tile`transparency16`)
     }
-    for (let value of tiles.getTilesByType(assets.tile`myTile2`)) {
+    for (let fg of tiles.getTilesByType(assets.tile`myTile2`)) {
         water = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -258,7 +277,7 @@ function LEVEL_1 () {
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.THE_END)
-        tiles.placeOnTile(water, value)
+        tiles.placeOnTile(water, fg)
         animation.runImageAnimation(
         water,
         [img`
@@ -333,13 +352,52 @@ function LEVEL_1 () {
         200,
         true
         )
-        tiles.setTileAt(value, assets.tile`transparency16`)
+        tiles.setTileAt(fg, assets.tile`transparency16`)
+    }
+    for (let fg of tiles.getTilesByType(assets.tile`tile5`)) {
+        flag = sprites.create(img`
+            ................................
+            ................................
+            ................................
+            .............f..................
+            ............ffff................
+            ............fff2ff..............
+            ............fff222ff............
+            ............fff22222ff..........
+            ............fff2222222ff........
+            ............fff222222222f.......
+            ............fff2222222ff........
+            ............fff22222ff..........
+            ............fff222ff............
+            ............fff2ff..............
+            ............ffff................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            ............fff.................
+            `, SpriteKind.flag)
+        tiles.placeOnTile(flag, fg)
+        tiles.setTileAt(fg, assets.tile`transparency16`)
     }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.vy == 0) {
         mySprite.vy = -250
     }
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
 })
 function left () {
     characterAnimations.loopFrames(
@@ -401,47 +459,27 @@ function left () {
     )
 }
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.shrub, function (sprite, location) {
-    current_level += 1
+    game.gameOver(true)
+    game.setGameOverMessage(true, "GAME OVER!")
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.THE_END, function (sprite, otherSprite) {
-    game.setGameOverMessage(false, "YOU CAN'T PLAY GAMES:))")
+    game.setGameOverMessage(false, "YOU CAN'T SWIM:))")
     game.gameOver(false)
+    game.reset()
 })
-function scene_1 () {
-    current_level = 0
-    scene.setBackgroundImage(assets.image`myImage`)
-    tiles.setCurrentTilemap(tilemap`level13`)
-    mySprite = sprites.create(img`
-        . . . . f f f f . . . . . 
-        . . f f f f f f f f . . . 
-        . f f f f f f 2 f f f . . 
-        f f f f f f 2 2 f f f 2 . 
-        f f f 2 f f f f f f f 2 . 
-        2 2 2 f f f d d f f 2 2 . 
-        f f f f f d d f f 2 2 f . 
-        f f f 4 f d d f 4 f f f . 
-        . f d 1 f d d f 1 d f . . 
-        . f d d d f f d d d f . . 
-        . f f f d 2 f d f f f . . 
-        f e f 1 1 1 1 1 1 f e f . 
-        d d f 1 1 1 1 1 1 f d d . 
-        d d f 1 1 1 1 1 1 f d d . 
-        . . . f f f f f f . . . . 
-        . . . f f . . f f . . . . 
-        `, SpriteKind.Player)
-    controller.moveSprite(mySprite)
-    left()
-    right()
-}
 info.onLifeZero(function () {
     game.setGameOverMessage(false, "Come on dude! IT'S EASY!")
     game.gameOver(false)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.flag, function (sprite, otherSprite) {
+    music.play(music.melodyPlayable(music.beamUp), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
     sprites.destroy(otherSprite)
     mySprite.startEffect(effects.trail, 1000)
 })
+let flag: Sprite = null
 let water: Sprite = null
 let duckkkkkk: Sprite = null
 let current_level = 0
