@@ -60,7 +60,7 @@ function right () {
     characterAnimations.rule(Predicate.MovingRight)
     )
 }
-controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     music.stopAllSounds()
     scene_1()
 })
@@ -410,6 +410,28 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.THE_END, function (sprite, other
 function scene_1 () {
     current_level = 0
     scene.setBackgroundImage(assets.image`myImage`)
+    tiles.setCurrentTilemap(tilemap`level13`)
+    mySprite = sprites.create(img`
+        . . . . f f f f . . . . . 
+        . . f f f f f f f f . . . 
+        . f f f f f f 2 f f f . . 
+        f f f f f f 2 2 f f f 2 . 
+        f f f 2 f f f f f f f 2 . 
+        2 2 2 f f f d d f f 2 2 . 
+        f f f f f d d f f 2 2 f . 
+        f f f 4 f d d f 4 f f f . 
+        . f d 1 f d d f 1 d f . . 
+        . f d d d f f d d d f . . 
+        . f f f d 2 f d f f f . . 
+        f e f 1 1 1 1 1 1 f e f . 
+        d d f 1 1 1 1 1 1 f d d . 
+        d d f 1 1 1 1 1 1 f d d . 
+        . . . f f f f f f . . . . 
+        . . . f f . . f f . . . . 
+        `, SpriteKind.Player)
+    controller.moveSprite(mySprite)
+    left()
+    right()
 }
 info.onLifeZero(function () {
     game.setGameOverMessage(false, "Come on dude! IT'S EASY!")
@@ -425,4 +447,4 @@ let duckkkkkk: Sprite = null
 let current_level = 0
 let mySprite: Sprite = null
 music.play(music.createSong(hex`0078000408020104001c00100500640000041e000004000000000000000000000000000a040004300000000400012408000c00012410001400012418001c00012420002400012428002c00012430003400012438003c000124`), music.PlaybackMode.LoopingInBackground)
-game.splash("PRESS ANY BUTTON", "TO TURN OF THE ALARM")
+game.splash("PRESS B", "TO TURN OF THE ALARM")
