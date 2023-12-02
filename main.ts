@@ -69,11 +69,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.f, function (sprite, otherSprite
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     music.stopAllSounds()
-    game.showLongText("HELLO! THIS IS A STORY ABOUT GEORGIE", DialogLayout.Bottom)
-    game.showLongText("PLEASE HELP HIM GET PASS THE JUNGLE TO GET TO HIS ENF CLASS ON TIME", DialogLayout.Bottom)
-    game.showLongText("THIS IS A SHORT GAME", DialogLayout.Bottom)
-    game.showLongText("HOPE YOU GUYS ENJOY IT:)", DialogLayout.Bottom)
-    LEVEL_1()
 })
 function LEVEL_1 () {
     current_level = 0
@@ -462,6 +457,13 @@ function left () {
     characterAnimations.rule(Predicate.MovingLeft)
     )
 }
+function intro () {
+    music.play(music.createSong(hex`0078000408020104001c00100500640000041e000004000000000000000000000000000a040004300000000400012408000c00012410001400012418001c00012420002400012428002c00012430003400012438003c000124`), music.PlaybackMode.LoopingInBackground)
+    game.showLongText("HELLO! THIS IS A STORY ABOUT GEORGIE", DialogLayout.Bottom)
+    game.showLongText("PLEASE HELP HIM GET PASS THE JUNGLE TO GET TO HIS ENF CLASS ON TIME", DialogLayout.Bottom)
+    game.showLongText("THIS IS A SHORT GAME", DialogLayout.Bottom)
+    game.showLongText("HOPE YOU GUYS ENJOY IT:)", DialogLayout.Bottom)
+}
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.shrub, function (sprite, location) {
     game.gameOver(true)
     game.setGameOverMessage(true, "GAME OVER!")
@@ -475,6 +477,9 @@ info.onLifeZero(function () {
     game.setGameOverMessage(false, "Come on dude! IT'S EASY!")
     game.gameOver(false)
 })
+function intro2 () {
+    game.splash("PRESS B", "TO TURN OF THE ALARM")
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.flag, function (sprite, otherSprite) {
     music.play(music.melodyPlayable(music.beamUp), music.PlaybackMode.UntilDone)
 })
@@ -489,5 +494,6 @@ let duckkkkkk: Sprite = null
 let current_level = 0
 let mySprite: Sprite = null
 game.showLongText("WAKE UP!!!!!", DialogLayout.Bottom)
-music.play(music.createSong(hex`0078000408020104001c00100500640000041e000004000000000000000000000000000a040004300000000400012408000c00012410001400012418001c00012420002400012428002c00012430003400012438003c000124`), music.PlaybackMode.LoopingInBackground)
-game.splash("PRESS B", "TO TURN OF THE ALARM")
+intro()
+intro2()
+LEVEL_1()
